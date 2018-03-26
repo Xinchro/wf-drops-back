@@ -1,0 +1,23 @@
+{
+  "name": "wf-drops-back",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Xinchro",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.100.0",
+    "dotenv": "^4.0.0",
+    "htmlparser": "^1.7.7",
+    "jsonfile": "^3.0.1",
+    "node-fetch": "^1.7.1",
+    "rimraf": "^2.6.1",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "serverless": "^1.26.1"
+  }
+}

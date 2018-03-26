@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="https://wf-drops.xinchronize.com/img/icon.png" type="image/png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>WF-Drops Scraper JSON</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="WF-Drops Scraper JSON listing">
+    <meta name="description" content="WF-Drops Scraper JSON listing">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Warframe Drops JSON Data">
+    <meta property="og:site_name" content="Warframe Drops JSON Data">
+    <meta property="og:image" content="https://wf-drops.xinchronize.com/img/icon.png">
+    <meta property="og:description" content="WF-Drops Scraper JSON listing">
+    <meta property="og:locale" content="en_GB">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Warframe Drops JSON Data">
+    <meta name="twitter:site" content="@xinchronize">
+    <meta name="twitter:description" content="WF-Drops Scraper JSON listing">
+    <meta name="twitter:image" content="https://wf-drops.xinchronize.com/img/icon.png">
+    
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #333;
+        color: #eee;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: calc(20% - 10px) calc(80% - 10px) 20px;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-content: center;
+        font-family: "Oswald";
+      }
+      a {
+        text-decoration: none;
+        color: #eee;
+      }
+      a:hover {
+        color: #e00;
+      }
+      header {
+        display: grid;
+        grid-column: 1;
+        grid-row: 1;
+        justify-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-bottom: 2px solid white;
+      }
+      header h1 {
+        font-size: 3em;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
+      header a {
+        text-decoration: red underline;
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-column: 1;
+        grid-row: 2;
+        justify-content: center;
+        grid-auto-rows: 50px;
+        width: 100%;
+        overflow: auto;
+        margin-top: 10px;
+      }
+      ul li {
+        min-width: 200px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 50% 50% 50px;
+        grid-template-rows: 50px;
+        align-items: center;
+      }
+      ul li a {
+        grid-column: 1;
+      }
+      ul li a:hover {
+        color: #e00;
+      }
+      ul li input {
+        grid-column: 2;
+      }
+      ul li button {
+        grid-column: 3;
+        background: none;
+        border: none;
+        color: #eee;
+        height: 100%;
+        cursor: pointer;
+      }
+      ul li button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      footer {
+        grid-column: 1;
+        grid-row: 3;
+        text-align: center;
+        font-size: 0.8em;
+      }
+
+      @media(max-width:830px) {
+        header h1 {
+          font-size: 1.5em;
+        }
+        header p {
+          font-size: 0.75em;
+        }
+      }
+
+       @media(max-width:420px) {
+        header h1 {
+          font-size: 1em;
+        }
+        header p {
+          font-size: 0.75em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    <header>
+      <h1>Welcome to the wf-drops scraper JSON listing</h1>
+      <p>Simply use any of the following URLs to get the daily updated data from <a href="//warframe.com">Warframe</a>'s drop rate <a href="https://n8k6e2y6.ssl.hwcdn.net/repos/hnfvc0o3jnfvc873njb03enrf56.html">page</a>.</p>
+    </header>
+
+    <ul>
+      #list#
+    </ul>
+    <footer>
+      <a href="//xinchronize.com">[Xinchronize]</a>
+      <span>Last generated: #lastgen#</span>
+    </footer>
+
+    <script>
+      function copyToClipboard(text) {
+        let listener  = e => {
+          e.clipboardData.setData("text/plain", text)
+          e.preventDefault()
+        }
+        document.addEventListener("copy", listener)
+        document.execCommand("copy")
+        document.removeEventListener("copy", listener)
+      }
+
+      function genURL(ele, name) {
+        console.log(ele, name)
+      }
+    </script>
+  </body>
+</html>

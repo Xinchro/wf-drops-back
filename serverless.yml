@@ -1,0 +1,15 @@
+service: wf-drops-scraper
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: prod
+  region: eu-west-2
+
+package:
+  exclude:
+    - tmp/**
+
+functions:
+  wf-drops-scraper:
+    handler: index.awsHandler
