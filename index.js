@@ -5,7 +5,7 @@ const fs = require('fs')
 const fetcher = require("./src/fetcher.js")
 const scraper = require("./src/scraper.js")
 const { generateHTML, saveHTML } = require("./src/generateHTML.js")
-const { saveArray, uploadArray, uploadToAWS } = require("./src/utils.js")
+const { dropGlossaryEndpoint, makeIndexEndpoint, saveArray, uploadArray, uploadToAWS } = require("./src/utils.js")
 
 function scrape() {
   return new Promise((resolve, reject) => {
@@ -39,6 +39,17 @@ exports.awsHandler = function() {
     .then(fetcher.fetchData) // fetch html and turn the raw dom into json
     .then(scrape) // scrape the dom to extract the data
     .then(saveArray) // save all the data into json files
+    .then(dropGlossaryEndpoint)
+    .then((files) => {
+      files.splice(0, 0, makeIndexEndpoint(files)) // create index files and add it to array
+      return files
+    }) // create index
+    .then((files) => {
+      return saveArray([files[0]]).then((response) => {
+        files.splice(0, 1, response[0]) // replace malformed index entry with well-formed version
+        return files
+      })
+    }) // save the index
     .then(uploadArray) // upload the json files
     .then(generateHTML) // generate data landing page
     .then(saveHTML) // save the landing page

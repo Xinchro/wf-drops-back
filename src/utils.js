@@ -123,8 +123,39 @@ function uploadArray(array) {
   })
 }
 
+function dropGlossaryEndpoint(files) {
+  const glossaryIndex = files.findIndex((file) => {
+    return file.filename.includes("glossary.json")
+  }) //find glossary index
+  files.splice(glossaryIndex, 1) // remove glossary from files array
+  return files
+}
+
+function makeIndexEndpoint(files) {
+  const baseURL = "https://wf-drops-data.xinchronize.com"
+  const index = {
+    name: "index",
+    data: {
+      endpoints: files.map((file) => {
+        return {
+          name: file.filename,
+          displayName: file.filename
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (string) => { return string.toUpperCase()})
+            .replace(".json", ""),
+          url: `${baseURL}/${file.filename}`
+        }
+      })
+    }
+  }
+
+  return index
+}
+
 exports.saveFile = saveFile
 exports.saveFileSync = saveFileSync
 exports.uploadToAWS = uploadToAWS
 exports.saveArray = saveArray
 exports.uploadArray = uploadArray
+exports.dropGlossaryEndpoint = dropGlossaryEndpoint
+exports.makeIndexEndpoint = makeIndexEndpoint
