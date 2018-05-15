@@ -46,7 +46,7 @@ function uploadToAWS(fileName, contentType) {
       s3 = new AWS.S3({apiVersion: '2006-03-01'})
 
       let uploadParams = {
-        Bucket: "wf-drops-data.xinchronize.com",
+        Bucket: "data.warframedrops.info",
         Key: '',
         Body: '',
         ContentType: contentType

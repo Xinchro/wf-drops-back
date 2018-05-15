@@ -66,7 +66,7 @@ function fillTemplate(template) {
                 default:
                   // add to rendered list
                   li += liTemplate
-                  .replace(/#url#/g,`https://wf-drops-data.xinchronize.com/${name}`)
+                  .replace(/#url#/g,`https://data.warframedrops.info/${name}`)
                   .replace(/#name#/g,`${name.replace(".json", "")}`)
               }
             })
