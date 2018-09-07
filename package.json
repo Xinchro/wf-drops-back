@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node -e 'require(\"./index.js\").awsHandler()'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Xinchro",

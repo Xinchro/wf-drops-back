@@ -5,6 +5,7 @@ const liTemplateURI = "./src/templates/li.html"
 
 function generateHTML() {
   return new Promise((res, rej) => {
+    console.log('Generating landing page...')
     // generate the JSON listing HTML file
     getTemplate(templateURI)
     .then((response) => {

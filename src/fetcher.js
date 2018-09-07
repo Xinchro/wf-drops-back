@@ -44,9 +44,9 @@ function htmlToJson(body) {
 
 function saveToJson(json) {
   console.log("Stringifying and saving JSON...")
-  
+
   let obj = json
-  
+
   utils.saveFileSync(`${process.env.DATA_FOLDER}`, "stored-data.json", obj, true)
 }
 

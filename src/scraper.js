@@ -2,6 +2,12 @@ require("dotenv").config()
 
 const utils = require("./utils")
 
+/**
+  Calls all the scraping functions in the proper sequence and returns the data as an array
+
+  @param {object} data - the entire dom as a JSON hierarchy
+  @return {array} - the all the sections as an array
+*/
 function scrapeEverything(data) {
   // set our working data to the body tag, found in the dom
   const dataSet = getBody(getHTML(data.dom))
@@ -12,11 +18,15 @@ function scrapeEverything(data) {
   ]
 }
 
+/**
+  Gets the HTML element as a JSON object heirarchy
+
+  @param {object} dom - the entire HTML document as a JSON object hierarchy
+  @return {object} - the HTML element in the provided JSON dom hierarchy
+*/
 function getHTML(dom) {
   // check if dom empty
   if(dom.length === 0) throw "dom is empty"
-
-  let failed = true
 
   // loop through dom to find the html tag
   return dom.find((element, index) => {
@@ -25,22 +35,25 @@ function getHTML(dom) {
       && element.name === "html"
     ) {
       console.log(`Found HTML tag at dom index ${index}`)
-      // didn't fail to find the tag
-      failed = false
       // found the correct element
       return true
+    } else {
+      // failed to find HTML tag
+      throw "Failed to find HTML tag"
     }
   })
 
-  // throw if we failed to find the html tag
-  if(failed) throw "Failed to find HTML tag"
 }
 
+/**
+  Gets the body element as a JSON object heirarchy
+
+  @param {object} html - the HTML element as a JSON object hierarchy
+  @return {object} - the body element in the provided JSON dom hierarchy
+*/
 function getBody(html) {
   // throw if children empty
   if(html.children.length === 0) throw "html has 0 children"
-
-  let failed = true
 
   // loop through children to find the body tag
   return html.children.find((element, index) => {
@@ -49,22 +62,32 @@ function getBody(html) {
       && element.name === "body"
     ) {
       console.log(`Found body tag at html children index ${index}`)
-      // didn't fail to find the tag
-      failed = false
       // foudn the correct element
       return true
+    } else {
+      // failed to find body tag
+      throw "Failed to find body tag"
     }
   })
-
-  // throw error if we failed to find the tag
-  if(failed) throw "Failed to find body tag"
 }
 
+/**
+  Scrapes for the glossary element(s) and returns them
+
+  @param {object} data - the JSON hierarchy
+  @return {array} the glossary section(s)
+*/
 function scrapeGlossary(data) {
   let glossary = data.children[4]
   return htmlListToJson(glossary, "glossary")
 }
 
+/**
+  Finds and gets the table sections as an array
+
+  @param {object} data - the JSON hierarchy
+  @return {array} the table sections as an array
+*/
 function scrapeSections(data) {
   console.log("Scraping sections...")
 
@@ -87,6 +110,13 @@ function scrapeSections(data) {
   return sections
 }
 
+/**
+  Gets the glossary list at the top of the page
+
+  @param {object} list - the JSON dom hierarchy of the list
+  @param {string} listName - the name of the list ('glossary')
+  @return {object} the glossary object
+*/
 function htmlListToJson(list, listName) {
   if(list.name != "ul") {
     return console.log("Error reading list to convert")
@@ -111,6 +141,13 @@ function htmlListToJson(list, listName) {
   }
 }
 
+/**
+  Turns an HTML table(from dom hierarchy) into a properly structured(useful) JSON object
+
+  @param {object} table - the table JSON dom hierarchy
+  @param tableName - the name to give the table
+  @return {object} the table's object
+*/
 function htmlTableToJson(table, tableName) {
   if(table.name != "table") {
     return console.log("Error reading table to convert")

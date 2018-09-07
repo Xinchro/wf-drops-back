@@ -7,6 +7,9 @@ const scraper = require("./src/scraper.js")
 const { generateHTML, saveHTML } = require("./src/generateHTML.js")
 const { dropGlossaryEndpoint, makeIndexEndpoint, saveArray, uploadArray, uploadToAWS } = require("./src/utils.js")
 
+let startTime = 0
+let endTime  = 0
+
 function scrape() {
   return new Promise((resolve, reject) => {
     let data = require(`${process.env.DATA_FOLDER}/stored-data.json`)
@@ -35,8 +38,14 @@ function clearData() {
 }
 
 exports.awsHandler = function() {
-  clearData()
-    .then(fetcher.fetchData) // fetch html and turn the raw dom into json
+    Promise.resolve()
+    .then((incoming) => {
+      startTime = Date.now()
+      console.log(`Start time: ${startTime}`)
+      return incoming
+    })
+    // .then(clearData)
+    // .then(fetcher.fetchData) // fetch html and turn the raw dom into json
     .then(scrape) // scrape the dom to extract the data
     .then(saveArray) // save all the data into json files
     .then(dropGlossaryEndpoint)
@@ -50,12 +59,17 @@ exports.awsHandler = function() {
         return files
       })
     }) // save the index
-    .then(uploadArray) // upload the json files
+    // .then(uploadArray) // upload the json files
     .then(generateHTML) // generate data landing page
     .then(saveHTML) // save the landing page
-    .then((response) => {
-      return uploadToAWS(`${response.path}/${response.filename}`, "text/html")
-    }) // upload landing page
+    // .then((response) => {
+      // return uploadToAWS(`${response.path}/${response.filename}`, "text/html")
+    // }) // upload landing page
+    .then(() => {
+      endTime = Date.now()
+      console.log(`End time: ${endTime}`)
+      console.log(`Total time(ms): ${endTime - startTime}`)
+    })
     .catch((err) => {
       console.error("Error in handler -", err)
       throw err

@@ -4,7 +4,7 @@ const fs = require("fs")
 const AWS = require("aws-sdk")
 const path = require('path')
 
-AWS.config.loadFromPath("./config.json")
+// AWS.config.loadFromPath("./config.json")
 
 function saveFile(path, fileName, data, stringify) {
   return new Promise((resolve, reject) => {
