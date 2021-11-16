@@ -10,7 +10,7 @@
   "author": "Xinchro",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.624.0",
+    "aws-sdk": "^2.814.0",
     "dotenv": "^4.0.0",
     "htmlparser": "^1.7.7",
     "jsonfile": "^3.0.1",
