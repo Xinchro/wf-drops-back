@@ -14,7 +14,7 @@
     "dotenv": "^4.0.0",
     "htmlparser": "^1.7.7",
     "jsonfile": "^3.0.1",
-    "node-fetch": "^1.7.1",
+    "node-fetch": "^2.6.7",
     "request": "^2.88.2",
     "rimraf": "^2.7.1"
   },
